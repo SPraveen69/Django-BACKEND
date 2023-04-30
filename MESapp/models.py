@@ -5,6 +5,9 @@ from django.contrib.auth.models import BaseUserManager
 
 # Create your models here.
 
+from django.db import models
+
+
 class UserProfileManager(BaseUserManager):
     """Helps Django work with the custom model"""
 
@@ -72,5 +75,46 @@ class ProfileFeedItem(models.Model):
         """return the model as a string"""
         
         return self.status_text
+    
+class SewingEfficiency(models.Model):
+    sc = models.IntegerField(blank=True)
+    style = models.CharField(max_length=255, blank=True)
+    buyer = models.CharField(max_length=255, blank=True)
+    smv = models.DecimalField(decimal_places=10, max_digits=10, blank=True)
+    working_hrs = models.CharField(max_length=255, blank=True, default='')
+    line_balance_count = models.CharField(max_length=255, blank=True)
+    othrs = models.DecimalField(decimal_places=10, max_digits=10, blank=True)
+    produce_mins = models.DecimalField(decimal_places=10, max_digits=10,  blank=True, default='')
+    use_mins = models.DecimalField(decimal_places=10, max_digits=10, blank=True)
+    location = models.CharField(max_length=255, blank=True)
+    create_date = models.CharField(max_length=255, blank=True)
+    line_no = models.CharField(max_length=255, blank=True)
+    actual_efficiency = models.DecimalField(decimal_places=10, max_digits=10, blank=True)
+    planned_efficiency = models.DecimalField(decimal_places=10, max_digits=10, blank=True)
+    pqty = models.IntegerField(blank=True)
+    component = models.CharField(max_length=255, blank=True)
+    plan_qty = models.CharField(max_length=255, blank=True)
+    plan_smv = models.CharField(max_length=255, blank=True)
+    plan_efficiency = models.DecimalField(decimal_places=10, max_digits=10, blank=True)
+    sec_id = models.CharField(max_length=255, blank=True)
+    shift = models.CharField(max_length=255, blank=True)
+    date_time = models.CharField(max_length=255, blank=True)
+    timestamp = models.CharField(max_length=255, blank=True)
+    ordertype = models.CharField(db_column='orderType', max_length=255, blank=True)  # Field name made lowercase.
+    aql_fail = models.CharField(max_length=255, blank=True)
+    cni_fail = models.CharField(max_length=255, blank=True)
+    prod_day = models.CharField(max_length=255, blank=True)
 
+    class Meta:
+        managed = True
+        db_table = "Sewing_Efficiency"
 
+class Person(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    
+    class Meta:
+        managed = True
+        db_table = "mesapp_person"
+    # def __str__(self):
+    #     return self.name
